@@ -1,0 +1,100 @@
+---
+import Proy from "./Proy.astro";
+---
+
+<section class="proyectos-section">
+  <h2 class="titulo-proyectos">Proyectos</h2>
+
+  <div class="proyectos-grid">
+
+    <Proy 
+      titulo="Sistema Escolar - Spring Boot"
+      descripcion="Sistema de gestión escolar completo desarrollado con Spring Boot. Permite administrar estudiantes, profesores, cursos, secciones y más. Arquitectura en capas, seguridad, DTOs y controladores REST."
+      link="https://github.com/Piero-Juarez/springboot-sistema-colegio"
+    />
+
+    <Proy 
+      titulo="YachayFood - App Móvil en Kotlin"
+      descripcion="Aplicación móvil para escanear códigos de barras, obtener datos desde una API global y generar recetas automáticas usando productos escaneados."
+      link="https://github.com/Stefano41Dev/dam1-yachayfood"
+    />
+
+  </div>
+</section>
+
+<style>
+.proyectos-section {
+  width: 100%;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.titulo-proyectos {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #b2ffb2;
+  text-shadow: 0 0 10px rgba(0, 255, 150, 0.3);
+}
+
+.proyectos-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.proyecto-card {
+  background: rgba(0, 40, 20, 0.35);
+  border: 1px solid rgba(0, 255, 150, 0.25);
+  border-radius: 14px;
+  padding: 1.7rem;
+  box-sizing: border-box;
+  box-shadow: 0 0 25px rgba(0, 255, 150, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.proyecto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 35px rgba(0, 255, 150, 0.15);
+}
+
+.proyecto-card h3 {
+  margin-bottom: 0.8rem;
+  color: #7aff7a;
+  font-size: 1.35rem;
+}
+
+.proyecto-card p {
+  margin-bottom: 1.2rem;
+  color: #e0ffe0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.proyecto-btn {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  background: rgba(0, 255, 150, 0.15);
+  border: 1px solid rgba(0, 255, 150, 0.4);
+  border-radius: 8px;
+  text-decoration: none;
+  color: #b2ffb2;
+  font-weight: 600;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.proyecto-btn:hover {
+  background: rgba(0, 255, 150, 0.35);
+  transform: scale(1.04);
+}
+
+@media (min-width: 700px) {
+  .proyectos-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+</style>

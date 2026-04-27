@@ -1,0 +1,40 @@
+---
+import foto from '../image/foto.webp'
+---
+<div class="perfil">
+  <img src={foto.src} alt="Foto de perfil" width="150" height="150" />
+  <h2>Hawell Snayder Urbina</h2>
+  <p>Computación e Informática</p>
+  <a href="https://www.cibertec.edu.pe" target="_blank">Cibertec Perú</a>
+</div>
+
+<style>
+  .perfil {
+    text-align: center;
+  }
+
+  .perfil img {
+    border-radius: 50%;
+    border: 3px solid #00bcd4;
+    margin-bottom: 1rem;
+  }
+
+  .perfil h2 {
+    margin: 0.5rem 0 0;
+  }
+
+  .perfil p, .perfil a {
+    color: #ccc;
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+  }
+
+  .perfil a {
+    color: #00bcd4;
+    text-decoration: none;
+  }
+
+  .perfil a:hover {
+    text-decoration: underline;
+  }
+</style>

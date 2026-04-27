@@ -1,0 +1,91 @@
+<nav class="menu">
+  <a href="#" data-target="inicio" class="active">Inicio</a>
+  <a href="#" data-target="proyectos">Proyectos</a>
+  <a href="#" data-target="experiencia">Experiencia</a>
+  <a href="#" data-target="contacto">Contacto</a>
+</nav>
+
+<style>
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Enlaces del menú */
+.menu a {
+  color: #7aff7a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.menu a.active,
+.menu a:hover {
+  color: #b2ffb2;
+  transform: scale(1.1);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .menu {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: rgba(0, 20, 5, 0.7);
+    padding: 0.8rem 1rem;
+    border-radius: 0.8rem;
+    margin: 1rem auto;
+  }
+
+  .menu a {
+    font-size: 0.9rem;
+  }
+}
+</style>
+
+<script type="module">
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuLinks = document.querySelectorAll(".menu a");
+    const sections = document.querySelectorAll(".info-section");
+
+    // Inicializa visibilidad
+    sections.forEach((section) => {
+      if (!section.classList.contains("active")) {
+        section.style.opacity = 0;
+        section.style.pointerEvents = "none";
+      }
+    });
+
+    menuLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = link.dataset.target;
+        const targetSection = document.getElementById(targetId);
+        if (!targetSection) return;
+
+        const activeSection = document.querySelector(".info-section.active");
+        if (activeSection === targetSection) return;
+
+        // Ocultar actual
+        if (activeSection) {
+          activeSection.style.opacity = 0;
+          activeSection.style.pointerEvents = "none";
+          activeSection.classList.remove("active");
+        }
+
+        // Mostrar nueva
+        targetSection.classList.add("active");
+        targetSection.style.pointerEvents = "auto";
+        setTimeout(() => (targetSection.style.opacity = 1), 50);
+
+        // Actualizar menú
+        menuLinks.forEach((l) => l.classList.remove("active"));
+        link.classList.add("active");
+      });
+    });
+  });
+</script>

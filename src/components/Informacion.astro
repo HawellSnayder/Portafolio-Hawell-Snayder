@@ -1,0 +1,218 @@
+---
+import SkillButton from './SkillButton.astro';
+import Proyectos from '../components/Proyectos.astro';
+import Experiencia from '../components/Experiencia.astro';
+import Contacto from '../components/Contacto.astro';
+---
+
+<div class="columna-derecha">
+
+  <!-- SECCIÓN INICIO -->
+  <section id="inicio" class="info-section active">
+    <div class="bloque-info">
+      <h1>Sobre mí</h1>
+      <p>
+        ¡Hola! Soy un joven de <strong>19 años</strong> apasionado por la tecnología y el desarrollo digital.  
+        Actualmente estudio <strong>Computación e Informática</strong> en <strong>Cibertec Perú</strong>, bajo la modalidad de <strong>2 años</strong>.
+      </p>
+      <p>
+        Me gusta experimentar con nuevas herramientas, diseñar interfaces intuitivas y desarrollar proyectos que conecten funcionalidad con estilo.  
+        Mi meta es seguir aprendiendo cada día y aportar al mundo digital con innovación, dedicación y un toque de creatividad. 🚀
+      </p>
+    </div>
+
+    <div class="bloque-skills">
+      <div class="tituloSkills">
+        <h1>💻 Habilidades y Herramientas</h1>
+        <p>
+          Estas son las principales tecnologías y herramientas que manejo
+          durante mi formación en <strong>Computación e Informática</strong>.
+        </p>
+      </div>
+
+      <div class="skills">
+        <SkillButton icon="/icons/html5.png" name="HTML5" color="#E34F26" description="Cuento con una buena base en HTML5..." />
+        <SkillButton icon="/icons/css3.png" name="CSS3" color="#264de4" description="Utilizo CSS3 para dar estilo..." />
+        <SkillButton icon="/icons/javascript.png" name="JavaScript" color="#f7df1e" description="Uso JavaScript para agregar interactividad..." />
+        <SkillButton icon="/icons/python.png" name="Python" color="#3776AB" description="Poseo una sólida base en Python..." />
+        <SkillButton icon="/icons/node.png" name="Node.js" color="#68A063" description="Cuento con conocimientos en Node.js..." />
+        <SkillButton
+          icon="/icons/slqlogo.png"
+          name="SQL"
+          color="#00758F"
+          description="Experiencia en el diseño de bases de datos relacionales, optimización de consultas y manejo de scripts para la gestión de datos persistentes."
+        />
+        <SkillButton
+          icon="/icons/java.png"
+          name="Java"
+          color="#E76F00"
+          description="Dominio del desarrollo de aplicaciones robustas bajo el paradigma orientado a objetos, implementando patrones de diseño, JDBC y manejo de DTOs."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN PROYECTOS -->
+  <section id="proyectos" class="info-section">
+    <Proyectos/>
+  </section>
+
+  <!-- SECCIÓN EXPERIENCIA -->
+  <section id="experiencia" class="info-section">
+    <Experiencia/>
+  </section>
+
+  <!-- SECCIÓN CONTACTO -->
+  <section id="contacto" class="info-section">
+    <Contacto/>
+  </section>
+
+</div>
+
+<style>
+:root {
+  --verde: #00ffc8;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #000;
+}
+
+.columna-derecha {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+/* SECCIONES CON ANIMACIÓN FLUIDA */
+.info-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.6s ease;
+  will-change: opacity, transform; /* mejora rendimiento */
+}
+
+.info-section.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* --- MODO MÓVIL --- */
+@media (max-width: 768px) {
+  .info-section {
+    position: relative;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    transition: none;
+    display: block;
+  }
+
+  .info-section:not(.active) {
+    display: none;
+  }
+
+  .bloque-skills {
+    padding: 1.5rem 1rem;
+    margin-bottom: 3rem;
+  }
+}
+
+/* BLOQUE INFO */
+.bloque-info {
+  background: rgba(0, 30, 10, 0.25);
+  border: 1px solid rgba(0, 255, 100, 0.15);
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  box-shadow: 0 0 15px rgba(0, 255, 100, 0.05);
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
+
+.bloque-info:hover {
+  transform: scale(1.01);
+}
+
+/* BLOQUE SKILLS */
+.bloque-skills {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  background: rgba(10, 10, 10, 0.5);
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 255, 150, 0.15);
+  box-shadow: 0 0 10px rgba(0, 255, 150, 0.1);
+  backdrop-filter: blur(4px);
+  box-sizing: border-box;
+}
+
+/* TITULO SKILLS */
+.tituloSkills h1 {
+  font-size: 1.8rem;
+  color: var(--verde);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 255, 200, 0.4);
+}
+
+.tituloSkills p {
+  color: #cfcfcf;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const menuLinks = document.querySelectorAll('.menu a');
+  const sections = document.querySelectorAll('.info-section');
+
+  menuLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.dataset.target;
+      const targetSection = document.getElementById(targetId);
+      if (!targetSection) return;
+
+      // Optimiza: solo cambia si realmente es distinto
+      const activeSection = document.querySelector('.info-section.active');
+      if (activeSection === targetSection) return;
+
+      if (activeSection) activeSection.classList.remove('active');
+      targetSection.classList.add('active');
+
+      menuLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+
+      if (window.innerWidth <= 768) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  });
+});
+</script>

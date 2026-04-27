@@ -1,0 +1,246 @@
+---
+// src/layouts/Layout.astro
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portafolio - Cibertec</title>
+  </head>
+
+  <body>
+    <!-- Fondo Matrix -->
+    <div class="matrix-fondo"></div>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="contenedor">
+      <!-- Columna izquierda: perfil + menú -->
+      <aside class="columna-izquierda">
+        <slot name="perfil" />
+        <slot name="menu" />
+      </aside>
+
+      <!-- Columna derecha: información -->
+      <main class="columna-derecha">
+        <slot name="info" />
+      </main>
+    </div>
+
+    <style>
+      /* RESET */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        width: 100%;
+        height: 100%;
+        font-family: 'Segoe UI', monospace;
+        background: rgb(5, 10, 10);
+        color: #e2ffe7;
+        overflow-x: hidden;
+      }
+
+      /* Fondo Matrix */
+      .matrix-fondo {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background:
+          linear-gradient(180deg, rgba(0,0,0,0.9), rgba(10,20,10,0.95)),
+          repeating-linear-gradient(0deg, rgba(0,255,90,0.04) 0, rgba(0,255,90,0.04) 1px, transparent 2px, transparent 3px),
+          repeating-linear-gradient(90deg, rgba(0,255,90,0.04) 0, rgba(0,255,90,0.04) 1px, transparent 2px, transparent 3px);
+        background-blend-mode: overlay;
+        backdrop-filter: blur(2px);
+      }
+
+      /* CONTENEDOR PRINCIPAL */
+      .contenedor {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      /* COLUMNA IZQUIERDA */
+      .columna-izquierda {
+        flex: 0.3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2rem;
+        padding: 2rem 1rem;
+        background: rgba(0, 15, 5, 0.85);
+        border-right: 1px solid rgba(0, 255, 100, 0.15);
+        box-shadow: 0 0 25px rgba(0, 255, 100, 0.05);
+        z-index: 5;
+      }
+
+      /* COLUMNA DERECHA */
+      .columna-derecha {
+        flex: 0.7;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2rem;
+        padding: 2rem 3rem;
+        overflow-y: auto;
+        background: rgba(0, 0, 0, 0.7);
+        border-left: 1px solid rgba(0, 255, 100, 0.1);
+        box-shadow: inset 0 0 40px rgba(0, 255, 100, 0.05);
+        scroll-behavior: smooth;
+      }
+
+      /* Scroll personalizado */
+      .columna-derecha::-webkit-scrollbar {
+        width: 8px;
+      }
+      .columna-derecha::-webkit-scrollbar-thumb {
+        background: rgba(0, 255, 120, 0.25);
+        border-radius: 10px;
+      }
+      .columna-derecha::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 255, 120, 0.5);
+      }
+
+      /* MENÚ */
+      .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .menu a {
+        color: #7aff7a;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+
+      .menu a.active,
+      .menu a:hover {
+        color: #b2ffb2;
+      }
+
+      /* SECCIONES - Fade suave */
+      .info-section {
+        transition: opacity 0.4s ease;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(0);
+      }
+
+      .info-section.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* 📱 RESPONSIVE TABLET */
+      @media (max-width: 900px) {
+        .contenedor {
+          flex-direction: column;
+          height: auto;
+        }
+
+        .columna-izquierda {
+          flex: none;
+          width: 100%;
+          border: none;
+          box-shadow: none;
+          padding: 1.5rem 1rem;
+          background: rgba(0, 20, 10, 0.85);
+          border-bottom: 1px solid rgba(0, 255, 100, 0.1);
+        }
+
+        .columna-derecha {
+          flex: none;
+          width: 100%;
+          padding: 1.5rem;
+        }
+
+        .menu {
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.8rem;
+        }
+
+        .menu a {
+          font-size: 0.95rem;
+        }
+      }
+
+      /* 📲 RESPONSIVE MÓVIL PEQUEÑO */
+      @media (max-width: 480px) {
+        .columna-izquierda {
+          padding: 1rem 0.5rem;
+          gap: 1rem;
+        }
+
+        .menu {
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+
+        .menu a {
+          font-size: 0.85rem;
+        }
+
+        .columna-derecha {
+          padding: 1rem;
+        }
+
+        .bloque-info h1,
+        .bloque-skills h1 {
+          font-size: 1.3rem !important;
+        }
+      }
+    </style>
+
+    <script type="module">
+      document.addEventListener('DOMContentLoaded', () => {
+        const menuLinks = document.querySelectorAll('.menu a');
+        const sections = document.querySelectorAll('.info-section');
+
+        // Inicialización
+        sections.forEach(section => {
+          if (!section.classList.contains('active')) {
+            section.style.opacity = 0;
+            section.style.pointerEvents = 'none';
+          } else {
+            section.style.opacity = 1;
+            section.style.pointerEvents = 'auto';
+          }
+        });
+
+        // Navegación
+        menuLinks.forEach(link => {
+          link.addEventListener('click', e => {
+            e.preventDefault();
+            const targetId = link.dataset.target;
+            const targetSection = document.getElementById(targetId);
+            if (!targetSection) return;
+
+            const activeSection = document.querySelector('.info-section.active');
+            if (activeSection === targetSection) return;
+
+            if (activeSection) activeSection.classList.remove('active');
+            targetSection.classList.add('active');
+
+            menuLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

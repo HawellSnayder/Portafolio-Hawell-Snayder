@@ -1,0 +1,200 @@
+---
+const email = "hawellsnayder@gmail.com";
+const whatsapp = "+51949808670";
+const instagram = "https://www.instagram.com/hawell.snay";
+const linkedin = "https://www.linkedin.com/in/hawell-snayder-urbina-fabian-819673351";
+---
+
+<section class="contacto-container">
+  <h1 class="titulo-contacto">📫 Contacto</h1>
+
+  <p class="intro-contacto">
+    Si deseas comunicarte conmigo, aquí tienes mis enlaces directos y un formulario
+    para enviarme un mensaje rápidamente.
+  </p>
+
+  <!-- 🔹 INFORMACIÓN DIRECTA -->
+  <div class="contact-info">
+
+    <!-- Email -->
+    <a class="contact-item" href={"mailto:" + email}>
+      <img src="/icons/gmail.webp" alt="Email" />
+      <div>
+        <h3>Correo Electrónico</h3>
+        <p>{email}</p>
+      </div>
+    </a>
+
+    <!-- WhatsApp -->
+    <a class="contact-item" href={`https://wa.me/${whatsapp.replace("+", "")}`} target="_blank">
+      <img src="/icons/WhatsApp.svg.webp" alt="WhatsApp" />
+      <div>
+        <h3>WhatsApp</h3>
+        <p>{whatsapp}</p>
+      </div>
+    </a>
+
+    <!-- Instagram -->
+    <a class="contact-item" href={instagram} target="_blank">
+      <img src="/icons/instagram.png" alt="Instagram" />
+      <div>
+        <h3>Instagram</h3>
+        <p>@Hawell.Snay</p>
+      </div>
+    </a>
+
+    <!-- LinkedIn -->
+    <a class="contact-item" href={linkedin} target="_blank">
+      <img src="/icons/linkedin.png" alt="LinkedIn" />
+      <div>
+        <h3>LinkedIn</h3>
+        <p>Hawell Snayder Urbina Fabian</p>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- 🔹 FORMULARIO (MAILTO) -->
+  <form class="form-contact" action={`mailto:${email}`} method="POST" enctype="text/plain">
+
+    <label>
+      Nombre
+      <input type="text" name="Nombre" required />
+    </label>
+
+    <label>
+      Correo
+      <input type="email" name="Correo" required />
+    </label>
+
+    <label>
+      Mensaje
+      <textarea name="Mensaje" rows="5" required></textarea>
+    </label>
+
+    <button type="submit">Enviar Mensaje</button>
+
+  </form>
+</section>
+
+
+<style>
+/* 📌 CONTENEDOR */
+.contacto-container {
+  width: 100%;
+  max-width: 700px;   /* 🔥 Igual que experiencia para evitar que se haga gigante */
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  color: white;
+  box-sizing: border-box;
+}
+
+.titulo-contacto {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #00ffc8;
+  text-shadow: 0 0 10px rgba(0,255,200,0.4);
+}
+
+.intro-contacto {
+  text-align: center;
+  color: #cfcfcf;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+/* 📌 BLOQUE CONTACTO */
+.contact-info {
+  display: grid;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.3rem;
+  background: rgba(10, 10, 10, 0.55);
+  border-radius: 12px;
+  border: 1px solid rgba(0,255,150,0.15);
+  box-shadow: 0 0 15px rgba(0,255,150,0.1);
+  backdrop-filter: blur(6px);
+  text-decoration: none;
+  color: white;
+  transition: transform 0.25s ease;
+
+  width: 100%;
+  box-sizing: border-box;   /* 🔥 evita que se rompa la columna derecha */
+}
+
+.contact-item:hover {
+  transform: translateY(-3px);
+}
+
+.contact-item img {
+  width: 40px;
+  height: 40px;
+}
+
+/* 📌 FORMULARIO */
+.form-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(10, 10, 10, 0.55);
+  padding: 1.8rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0,255,150,0.15);
+  box-shadow: 0 0 15px rgba(0,255,150,0.1);
+
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-contact label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+  color: #bfffe8;
+}
+
+.form-contact input,
+.form-contact textarea {
+  margin-top: 0.3rem;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 1rem;
+}
+
+.form-contact button {
+  margin-top: 1rem;
+  padding: 0.9rem;
+  background: #00ffc8;
+  color: black;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.25s ease;
+}
+
+.form-contact button:hover {
+  background: #7affdf;
+}
+
+
+/* 📱 RESPONSIVE */
+@media (max-width: 480px) {
+  .contacto-container {
+    max-width: 100%;
+    padding: 1rem;
+  }
+}
+</style>

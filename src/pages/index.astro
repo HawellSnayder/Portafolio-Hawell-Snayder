@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Perfil from '../components/Perfil.astro';
+import Menu from '../components/Menu.astro';
+import Info from '../components/Informacion.astro';
+---
+
+<Layout>
+  <Perfil slot="perfil" />
+  <Menu slot="menu" />
+
+  <!-- Slot info contiene toda la sección principal -->
+  <Info slot="info" />
+</Layout>

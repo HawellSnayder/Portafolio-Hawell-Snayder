@@ -1,0 +1,183 @@
+---
+/**
+ * Componente SkillButton.astro
+ * Props:
+ *  - icon: URL o ruta del icono (SVG o PNG)
+ *  - name: nombre del lenguaje/herramienta
+ *  - description: texto de lo que sabes sobre él
+ *  - color: color principal del botón (opcional)
+ */
+const { icon, name, description, color = "#00ffc8" } = Astro.props;
+---
+
+<div class="skill" style={`--accent: ${color};`}>
+  <button class="icon-btn">
+    <img src={icon} alt={name} class="icon" />
+    <span class="name">{name}</span>
+  </button>
+
+  <div class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="anim-bg"></div>
+      <h2>{name}</h2>
+      <p>{description}</p>
+      <button class="close-btn">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script is:client>
+  document.querySelectorAll('.skill').forEach(skill => {
+    const btn = skill.querySelector('.icon-btn');
+    const modal = skill.querySelector('.modal-backdrop');
+    const close = skill.querySelector('.close-btn');
+
+    btn.addEventListener('click', () => modal.classList.remove('hidden'));
+    close.addEventListener('click', () => modal.classList.add('hidden'));
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.classList.add('hidden');
+    });
+  });
+</script>
+
+<style>
+/* 🔹 Contenedor base */
+.skill {
+  position: relative;
+  display: inline-block;
+  margin: 1rem;
+}
+
+/* 🔹 Botón principal con icono */
+.icon-btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
+
+.icon-btn:hover {
+  transform: scale(1.05);
+}
+
+/* 🔹 Ícono con sombra blanca ligera */
+.icon {
+  width: 70px;
+  height: 70px;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  will-change: transform, filter;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.4));
+}
+
+.icon-btn:hover .icon {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 10px var(--accent));
+}
+
+/* 🔹 Nombre que aparece al pasar el mouse */
+.name {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.icon-btn:hover .name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 🔹 Fondo del modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  animation: fadeIn 0.3s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 🔹 Contenido del modal */
+.modal {
+  position: relative;
+  background: rgba(255, 255, 255, 0.97);
+  color: #111;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 400px;
+  width: 90%;
+  overflow: hidden;
+  z-index: 101;
+  animation: popIn 0.3s ease;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+.modal h2 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.modal p {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.close-btn {
+  margin-top: 1rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.close-btn:hover {
+  opacity: 0.85;
+}
+
+/* 🔹 Fondo animado del modal */
+.anim-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, var(--accent), transparent 70%);
+  animation: moveBg 5s infinite alternate ease-in-out;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+/* 🔹 Animaciones */
+@keyframes moveBg {
+  from { background-position: 20% 30%; }
+  to { background-position: 80% 70%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+</style>

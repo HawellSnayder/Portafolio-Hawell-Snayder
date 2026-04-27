@@ -1,0 +1,57 @@
+---
+const { titulo, descripcion, link } = Astro.props;
+---
+
+<div class="proyecto-card">
+  <h3>{titulo}</h3>
+  <p>{descripcion}</p>
+  <a href={link} target="_blank" class="proyecto-btn">Ver proyecto</a>
+</div>
+
+<style>
+.proyecto-card {
+  background: rgba(0, 40, 20, 0.35);
+  border: 1px solid rgba(0, 255, 150, 0.25);
+  border-radius: 14px;
+  padding: 1.7rem;
+  box-sizing: border-box;
+  box-shadow: 0 0 25px rgba(0, 255, 150, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.proyecto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 35px rgba(0, 255, 150, 0.15);
+}
+
+.proyecto-card h3 {
+  margin-bottom: 0.8rem;
+  color: #7aff7a;
+  font-size: 1.35rem;
+}
+
+.proyecto-card p {
+  margin-bottom: 1.2rem;
+  color: #e0ffe0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.proyecto-btn {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  background: rgba(0, 255, 150, 0.15);
+  border: 1px solid rgba(0, 255, 150, 0.4);
+  border-radius: 8px;
+  text-decoration: none;
+  color: #b2ffb2;
+  font-weight: 600;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.proyecto-btn:hover {
+  background: rgba(0, 255, 150, 0.35);
+  transform: scale(1.04);
+}
+</style>
+
